@@ -8,8 +8,12 @@ import (
 
 func main() {
 
+  
+   var c chan string = make(chan string)
 
-   go Basics.F(0)
+   go Basics.Printer(c)
+   go Basics.Pinger(c)
+ 
    var input string
    fmt.Scanln(&input)
 
