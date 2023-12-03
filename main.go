@@ -3,31 +3,44 @@ package main
 import "fmt"
 
 type Person struct{
+
   name string
-  phone int
-  location string
+  phone string
+  address string
 }
 
-func (p Person)get_person(){
+type Employee struct{
+  Person //embedding
 
-  fmt.Println(p.name,p.phone,p.location)
+  id int
+  dept string
+  salary float64
 
 }
 
-func (p *Person)set_person(){
+func (e *Employee)setInfo(){
 
-  fmt.Scan(&p.name)
-  fmt.Scan(&p.phone)
-  fmt.Scan(&p.location)
+  fmt.Scan(&e.name)
+  fmt.Scan(&e.phone)
+  fmt.Scan(&e.address)
+  fmt.Scan(&e.salary)
+
+
 }
+
+func (e Employee)getInfo(){
+
+  fmt.Print(e.id, e.name, e.phone,e.salary )
+
+}
+
 
 func main(){
 
-  per := Person{ "Saif", 123, "De"}
+    emp:=Employee{}
 
-  
-  per.get_person()
-  per.set_person()
-  per.get_person()
+    emp.setInfo()
+    emp.getInfo()
+ 
 
 }
