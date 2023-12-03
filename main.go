@@ -1,46 +1,33 @@
 package main
 
-import (
-	"fmt"
+import "fmt"
 
-	"github.com/zakhaev43/Golang-Practice/Basics"
-)
+type Person struct{
+  name string
+  phone int
+  location string
+}
 
-func main() {
+func (p Person)get_person(){
+
+  fmt.Println(p.name,p.phone,p.location)
+
+}
+
+func (p *Person)set_person(){
+
+  fmt.Scan(&p.name)
+  fmt.Scan(&p.phone)
+  fmt.Scan(&p.location)
+}
+
+func main(){
+
+  per := Person{ "Saif", 123, "De"}
 
   
-   var c chan string = make(chan string)
+  per.get_person()
+  per.set_person()
+  per.get_person()
 
-   go Basics.Printer(c)
-   go Basics.Pinger(c)
- 
-   var input string
-   fmt.Scanln(&input)
-
-
-
-
-
-   // Basics.Pstring()
-
-     //Basics.Lc()
-    // Basics.ArraysP();
-   
-    /*
-    p:=15
-    fmt.Println(p)
-    Basics.Ppoint(&p)
-    */
-
-    /*
-   j:= Basics.Pstr()
-
-   fmt.Println(j)
-
-   */
-
-
-
-
-
-   }
+}
