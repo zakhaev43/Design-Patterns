@@ -2,45 +2,59 @@ package main
 
 import "fmt"
 
-type Person struct{
-
-  name string
-  phone string
-  address string
+type Human interface {
+	setInfo()
+	getInfo()
 }
 
-type Employee struct{
-  Person //embedding
-
-  id int
-  dept string
-  salary float64
-
+type Person struct {
+	name    string
+	phone   int
+	address string
 }
 
-func (e *Employee)setInfo(){
-
-  fmt.Scan(&e.name)
-  fmt.Scan(&e.phone)
-  fmt.Scan(&e.address)
-  fmt.Scan(&e.salary)
-
-
+type Employee struct {
+	id     int
+	dept   string
+	salary float64
 }
 
-func (e Employee)getInfo(){
+func (e *Employee) setInfo() {
 
-  fmt.Print(e.id, e.name, e.phone,e.salary )
+	e.dept = "tax"
+	e.id = 12
+	e.salary = 5000
 
 }
 
+func (p *Person) setInfo() {
+	p.name = "saif"
+	p.address = "Bayern"
+	p.phone = 123
 
-func main(){
+}
 
-    emp:=Employee{}
+func (e Employee) getInfo() {
 
-    emp.setInfo()
-    emp.getInfo()
- 
+	fmt.Println("Id ", e.id, "Phone", e.dept, "Adress", e.salary)
 
+}
+
+func (p Person) getInfo() {
+
+	fmt.Println("Name", p.name, "Address", p.address, "Phone", p.phone)
+}
+
+func main() {
+
+	emp := Employee{}
+	per := Person{}
+
+	human := []Human{&emp, &per}
+
+	for _, human := range human {
+		human.setInfo()
+		human.getInfo()
+
+	}
 }
