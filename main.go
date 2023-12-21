@@ -1,60 +1,23 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+)
 
-type Human interface {
-	setInfo()
-	getInfo()
+func starter(wg *sync.WaitGroup) {
+	fmt.Println("This is the starter on call")
+	defer wg.Done()
 }
 
-type Person struct {
-	name    string
-	phone   int
-	address string
-}
-
-type Employee struct {
-	id     int
-	dept   string
-	salary float64
-}
-
-func (e *Employee) setInfo() {
-
-	e.dept = "tax"
-	e.id = 12
-	e.salary = 5000
-
-}
-
-func (p *Person) setInfo() {
-	p.name = "saif"
-	p.address = "Bayern"
-	p.phone = 123
-
-}
-
-func (e Employee) getInfo() {
-
-	fmt.Println("Id ", e.id, "Phone", e.dept, "Adress", e.salary)
-
-}
-
-func (p Person) getInfo() {
-
-	fmt.Println("Name", p.name, "Address", p.address, "Phone", p.phone)
+func follow() {
+	fmt.Println("This is the follower on call")
 }
 
 func main() {
-
-	emp := Employee{}
-	per := Person{}
-
-	human := []Human{&emp, &per}
-
-	for _, human := range human {
-		human.setInfo()
-		human.getInfo()
-
-	}
+	var wg sync.WaitGroup
+	wg.Add(1)
+	go starter(&wg)
+	follow()
+	wg.Wait()
 }
