@@ -1,9 +1,7 @@
 package main
 
-import (
-	"fmt"
-)
+import "github.com/zakhaev43/Golang-Practice/design_pattern"
 
 func main() {
-	fmt.Println("Hello World with POLL SCM")
+    design_pattern.Go_Decorator()
 }
